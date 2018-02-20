@@ -18,7 +18,7 @@
     <div *ngIf="all.length > 0">
         <h3>All</h3>
         <div class="address-book__section">
-            <div class="address-book__tile" *ngFor="let item of all">
+            <div class="address-book__tile" *ngFor="let item of all" [class.selected]="item === selected">
                 <div class="address-book__name">
                     {{item.name}}
                 </div>
@@ -30,7 +30,7 @@
                         Remove
                     </button>
                     <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                    <button type="button" name="edit" class="button-action">
+                    <button type="button" name="edit" class="button-action" (click)="onEdit(item)">
                         Edit
                     </button>
                 </div>
@@ -40,3 +40,5 @@
         </div>
     </div>
 </div>
+
+<app-address-detail [address]="selected" (addressSaved)="onUpadate()"></app-address-detail>
