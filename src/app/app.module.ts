@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AddressBookComponent } from './address-book/address-book.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddressBookComponent
   ],
   imports: [
     BrowserModule
