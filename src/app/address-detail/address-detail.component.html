@@ -1,0 +1,23 @@
+<div class="address-book" *ngIf="address">
+    <h1>
+        Edit Address
+    </h1>
+
+    <div class="address-book__form">
+        <label for="name">
+            Name
+        </label>
+        <div class="input-box">
+            <input [(ngModel)]="address.name" class="input-text" type="text" name="name" placeholder="Enter full name"/>
+        </div>
+        <label for="address">
+            Address
+        </label>
+        <div class="input-box">
+            <input [(ngModel)]="address.address" class="input-text" type="text" name="address" placeholder="Enter address"/>
+        </div>
+        <button type="button" name="remove" class="button-default" (click)="onSave()">
+            Save
+        </button>
+    </div>
+</div>

@@ -11,6 +11,7 @@ export class AddressBookComponent implements OnInit {
     user:string;
     default: Address;
     all: Address[];
+    selected: Address;
 
     constructor() { }
 
@@ -24,5 +25,16 @@ export class AddressBookComponent implements OnInit {
 
     onRemove(item) {
         this.all = this.all.filter( a => a != item);
+        if (this.selected === item) {
+            this.selected = null;
+        }
+    }
+
+    onEdit(item) {
+        this.selected = item;
+    }
+
+    onUpadate() {
+        this.selected = null;
     }
 }
