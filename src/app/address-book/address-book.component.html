@@ -1,0 +1,36 @@
+<div class="address-book">
+    <h1>
+        Address Book - <span>{{user}}</span>
+    </h1>
+
+    <h3>Default</h3>
+    <div class="address-book__section">
+        <div class="address-book__tile light">
+            <div class="address-book__name">
+                {{default.name}}
+            </div>
+            <div class="address-book__address">
+                {{default.address}}
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="all.length > 0">
+        <h3>All</h3>
+        <div class="address-book__section">
+            <div class="address-book__tile" *ngFor="let item of all">
+                <div class="address-book__name">
+                    {{item.name}}
+                </div>
+                <div class="address-book__address">
+                    {{item.address}}
+                </div>
+                <button type="button" name="button" class="button-remove" (click)="onRemove(item)">
+                    Remove
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
