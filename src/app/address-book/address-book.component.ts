@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Address } from '../address';
-import { ADDRESSES } from '../address-data';
+import { AddressService } from '../address.service';
 
 @Component({
     selector: 'app-address-book',
@@ -13,28 +13,43 @@ export class AddressBookComponent implements OnInit {
     all: Address[];
     selected: Address;
 
-    constructor() { }
+    constructor(private addressService: AddressService) { }
 
     ngOnInit() {
-        this.user = 'Jane Doe';
-        this.all = ADDRESSES;
-        if (this.all.length > 0) {
-            this.default = this.all[0];
-        }
+        this.user = 'James Bond';
+        this.getAddresses();
+        this.getDefaultAddress();
     }
 
     onRemove(item) {
-        this.all = this.all.filter( a => a != item);
-        if (this.selected === item) {
-            this.selected = null;
-        }
+        this.addressService.removeAddress(item.id).subscribe();
+        this.getAddresses();
+        this.getDefaultAddress();
     }
 
     onEdit(item) {
         this.selected = item;
     }
 
-    onUpadate() {
+    onUpdate($event) {
         this.selected = null;
+        this.addressService.updateAddress($event.address).subscribe();
+        // only when default address is affected
+        this.getDefaultAddress();
+    }
+
+    getAddresses(): void {
+        this.addressService.getAddresses().subscribe(addresses => this.all = addresses);
+    }
+
+    getDefaultAddress(): void {
+        this.addressService.getAddresses().subscribe(addresses => {
+            if(addresses.length > 0) {
+                this.default = addresses[0];
+            }
+            else {
+                this.default = null;
+            }
+        });
     }
 }

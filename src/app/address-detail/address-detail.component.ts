@@ -8,7 +8,7 @@ import { Address } from '../address';
 })
 export class AddressDetailComponent implements OnInit {
     @Input() address:Address;
-    @Output() addressSaved = new EventEmitter<void>();
+    @Output() addressSaved = new EventEmitter<any>();
 
     constructor() { }
 
@@ -16,6 +16,6 @@ export class AddressDetailComponent implements OnInit {
     }
 
     onSave() {
-        this.addressSaved.emit();
+        this.addressSaved.emit({address: this.address});
     }
 }
