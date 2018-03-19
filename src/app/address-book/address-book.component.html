@@ -3,22 +3,31 @@
         Address Book - <span>{{user}}</span>
     </h1>
 
-    <h3>Default</h3>
-    <div class="address-book__section">
-        <div class="address-book__tile light">
-            <div class="address-book__name">
-                {{default.name}}
-            </div>
-            <div class="address-book__address">
-                {{default.address}}
+    <div *ngIf="default">
+        <h3>Default</h3>
+        <div class="address-book__section">
+            <div class="address-book__tile light">
+                <div class="address-book__name">
+                    {{default.name}}
+                </div>
+                <div class="address-book__address">
+                    {{default.address}}
+                </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="all.length > 0">
+    <div class="address-book__loading" *ngIf="!default">
+        <h3>Default</h3>
+        <div class="address-book__tile empty">
+            You have no address
+        </div>
+    </div>
+
+    <div *ngIf="all && all.length > 0">
         <h3>All</h3>
         <div class="address-book__section">
-            <div class="address-book__tile" *ngFor="let item of all">
+            <div class="address-book__tile" *ngFor="let item of all" [class.selected]="item === selected">
                 <div class="address-book__name">
                     {{item.name}}
                 </div>
@@ -30,13 +39,20 @@
                         Remove
                     </button>
                     <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                    <button type="button" name="edit" class="button-action">
+                    <button type="button" name="edit" class="button-action" (click)="onEdit(item)">
                         Edit
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
 
-
+    <div class="address-book__loading" *ngIf="!all || all.length == 0">
+        <h3>All</h3>
+        <div class="address-book__tile empty">
+            You have no address
         </div>
     </div>
 </div>
+
+<app-address-detail [address]="selected" (addressSaved)="onUpdate($event)"></app-address-detail>
