@@ -34,7 +34,7 @@ export class AddressBookComponent implements OnInit {
         this.selected = item;
     }
 
-    onUpadate() {
+    onUpdate() {
         this.selected = null;
     }
 }
